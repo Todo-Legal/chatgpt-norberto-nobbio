@@ -79,7 +79,7 @@ export default {
                 'bot': this.bots[this.currentBotIndex].name,
                 'prompt': this.content,
             }
-            const path = `http://${window.location.hostname}:5000/get_answer`
+            const path = 'http://127.0.0.1:5000/get_answer'
             axios.post(path, param)
                 .then((res) => {
                     this.$store.commit('SEND_MESSAGE', {
@@ -219,14 +219,14 @@ cite i {
 .chat-user .chat-content {
     margin-left: 0;
     text-align: left;
-    background-color: #33DF83;
+    background-color: #9ddef1;
     color: #fff;
 }
 
 .chat-others .chat-content {
     margin-left: 0;
     text-align: left;
-    background-color: #33DF83;
+    background-color: #1da3cc;
     color: #fff;
 }
 
@@ -237,7 +237,7 @@ cite i {
     padding: 10px 15px;
     background-color: #eee;
     border-radius: 3px;
-    color: #333;
+    color: #e7e3e3;
     word-break: break-all;
     max-width: 462px \9;
 }
@@ -275,13 +275,13 @@ cite i {
 .chat-user .chat-content:after {
     left: auto;
     right: -10px;
-    border-top-color: #33DF83;
+    border-top-color: #9ddef1;
 }
 
 .chat-others .chat-content:after {
     left: -10px;
     right: auto;
-    border-top-color: #33DF83;
+    border-top-color: #1da3cc;
 }
 
 .foot {
@@ -306,7 +306,7 @@ cite i {
     line-height: 48px;
     margin-left: 5px;
     padding: 0 6px;
-    background-color: #33DF83;
+    background-color: #3292c9;
     color: #fff;
     border-radius: 3px;
 }

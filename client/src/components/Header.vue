@@ -31,7 +31,7 @@ export default {
     right: 0px;
     left: 20%;
 
-    background-color: #33DF83;
+    background-color: #056fe7;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -46,7 +46,7 @@ export default {
 
 .top .name {
     font-size: 18px;
-    color: #444;
+    color: #ffffff;
     margin-left: 10px;
 }
 </style>

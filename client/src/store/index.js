@@ -1,8 +1,8 @@
 // Import and use Vuex
 import Vuex from 'vuex'
 import Vue from 'vue'
-import util from '@/common/util'
-import axios from 'axios'
+// import util from '@/common/util'
+// import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -64,6 +64,7 @@ const mutations = {
             let init_prompt = value[bot_name]
             state.bots.push({
                 name: bot_name,
+                // avatar: 'assets/tl.png',
                 avatar: 'assets/' + Math.floor(Math.random() * 10) + '.png',
                 init_prompt: init_prompt,
                 messages: []
@@ -80,41 +81,41 @@ const mutations = {
         If you have better suggestions, please contact me.
          */
         // before chat to the bot, send the init_prompt to the bot
-        for (let bot of state.bots) {
-            console.log('send init prompt to ', bot.name)
+        // for (let bot of state.bots) {
+        //     console.log('send init prompt to ', bot.name)
 
-            // user send init prompts of all bots
-            this.commit('SEND_MESSAGE', {
-                content: bot.init_prompt,
-                sender: 'user',
-                receiver: bot.name,
-                time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
-            })
+        //     // user send init prompts of all bots
+        //     this.commit('SEND_MESSAGE', {
+        //         content: bot.init_prompt,
+        //         sender: 'user',
+        //         receiver: bot.name,
+        //         time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
+        //     })
 
-            // make a request to server
-            const param = {
-                'bot': bot.name,
-                'prompt': bot.init_prompt,
-            }
-            const path = `http://${window.location.hostname}:5000/get_answer`
-            axios.post(path, param)
-                .then((res) => {
-                    this.commit('SEND_MESSAGE', {
-                        content: res.data['answer'],
-                        sender: bot.name,
-                        receiver: 'user',
-                        time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
-                    })
-                })
-                .catch((error) => {
-                    this.commit('SEND_MESSAGE', {
-                        content: `${bot.name} happened error: ${error}`,
-                        sender: bot.name,
-                        receiver: 'user',
-                        time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
-                    })
-                })
-        }
+        //     // make a request to server
+        //     const param = {
+        //         'bot': bot.name,
+        //         'prompt': bot.init_prompt,
+        //     }
+        //     const path = `http://127.0.0.1:5000/get_answer`
+        //     axios.post(path, param)
+        //         .then((res) => {
+        //             this.commit('SEND_MESSAGE', {
+        //                 content: res.data['answer'],
+        //                 sender: bot.name,
+        //                 receiver: 'user',
+        //                 time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
+        //             })
+        //         })
+        //         .catch((error) => {
+        //             this.commit('SEND_MESSAGE', {
+        //                 content: `${bot.name} happened error: ${error}`,
+        //                 sender: bot.name,
+        //                 receiver: 'user',
+        //                 time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
+        //             })
+        //         })
+        // }
     }
 }
 
