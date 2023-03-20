@@ -1,6 +1,7 @@
 <template>
     <div class="sidebar">
-        <h2>Bots List</h2>
+        <!-- <h2>Chats</h2> -->
+        <img src="assets/tl.png">
         <ul class="bot-list">
             <li v-for="(bot, index) in bots" :key="index"
                 :class="{current: currentBotIndex === index}"
@@ -45,7 +46,7 @@ export default {
 .sidebar {
     position: absolute;
     width: 20%;
-    background-color: skyblue;
+    /* background-color: rgb(1, 121, 168); */
     top: 0;
     left: 0;
     height: 100%;
@@ -58,11 +59,13 @@ export default {
     padding: 0;
     height: 100%; /* adjust this value to fit your layout */
     overflow-y: auto;
-    background-color: lightblue;
+    background-color: rgb(224, 231, 236);
 }
 
 .sidebar h2 {
     margin-top: 0;
+    color: #ffffff;
+    text-align: center;
 }
 
 .sidebar li {
