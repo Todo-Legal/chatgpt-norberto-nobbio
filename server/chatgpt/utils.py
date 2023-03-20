@@ -11,7 +11,7 @@ import numpy as np
 
 from .constants import Environment
 openai.api_key = Environment.OPENAI_API
-MAX_SECTION_LEN = Environment.MAX_SECTION_LEN
+MAX_SECTION_LEN = int(Environment.MAX_SECTION_LEN)
 SEPARATOR = "\n* "
 ENCODING = "gpt2"  # encoding for text-davinci-003
 
