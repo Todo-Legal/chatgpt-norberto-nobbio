@@ -2,7 +2,7 @@
     <div class="sidebar">
         <!-- <h2>Chats</h2> -->
         <img src="assets/tl.png">
-        <ul class="bot-list">
+         <ul class="bot-list">
             <li v-for="(bot, index) in bots" :key="index"
                 :class="{current: currentBotIndex === index}"
                 @click="selectBot(index)">
@@ -16,6 +16,7 @@
                 </div>
             </li>
         </ul>
+        <p><b>Disclamer:</b> este chat no reemplaza la asesoría de un profesional del derecho. Sirve a manera de consulta rápida, no obstante esta versión se encuentra en continuo entrenamiento. Por favor, consulta con tu abogado de confianza antes de iniciar un proceso legal.</p>
     </div>
 </template>
 
@@ -119,4 +120,7 @@ export default {
     margin: 0;
 }
 
+p {
+    font-size: 9px;
+}
 </style>

@@ -6,3 +6,5 @@
 ./server/.idea/
 ./server/log/
 .env
+*.vscode
+*.~lock.*

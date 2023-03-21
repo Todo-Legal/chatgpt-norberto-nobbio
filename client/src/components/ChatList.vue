@@ -26,6 +26,7 @@
             </span>
         </section>
     </div>
+    
 </template>
 
 <script>
@@ -79,7 +80,7 @@ export default {
                 'bot': this.bots[this.currentBotIndex].name,
                 'prompt': this.content,
             }
-            const path = 'http://18.221.190.221:5000/get_answer'
+            const path = 'http://127.0.0.1:5000/get_answer'
             axios.post(path, param)
                 .then((res) => {
                     this.$store.commit('SEND_MESSAGE', {

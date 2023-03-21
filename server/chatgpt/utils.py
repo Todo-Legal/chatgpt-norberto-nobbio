@@ -1,8 +1,3 @@
-# %%
-try:
-    import cPickle as pickle
-except ImportError:  # Python 3.x
-    import pickle
 
 import openai
 import tiktoken
@@ -66,14 +61,16 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame):
      
     for _, section_index in most_relevant_document_sections:
         # Add contexts until we run out of space.        
-        document_section = df.loc[section_index]
+        document_section = df.loc[section_index[1:]]
         
         chosen_sections_len += document_section.tokens + separator_len
-        if chosen_sections_len > MAX_SECTION_LEN:
+        print(chosen_sections_len)
+        if isinstance(chosen_sections_len,np.int64 ) and chosen_sections_len > MAX_SECTION_LEN:
             break
-            
+        elif isinstance(chosen_sections_len,list) and chosen_sections_len[0] > MAX_SECTION_LEN:
+            break
         chosen_sections.append(SEPARATOR + document_section.content.replace("\n", " "))
-        chosen_sections_indexes.append(str(section_index))
+        chosen_sections_indexes.append(str(section_index[1:]))
             
     # Useful diagnostic information
     print(f"Selected {len(chosen_sections)} document sections:")
