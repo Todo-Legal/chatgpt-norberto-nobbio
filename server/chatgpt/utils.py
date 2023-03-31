@@ -76,7 +76,7 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame):
     print(f"Selected {len(chosen_sections)} document sections:")
     print("\n".join(chosen_sections_indexes))
     
-    header = """Answer the question as truthfully as possible using the provided context, paraphrase the answer and if the answer is not contained within the text below, say "I don't know."\n\nContext:\n"""
+    header = """Answer the question as truthfully as possible using your information and the context provided, paraphrase the answer and if the answer is not contained within the text below, say "I don't know."\n\nContext:\n"""
     
     return header + "".join(chosen_sections) + "\n\n Q: " + question + "\n A:", "".join(chosen_sections)
 
@@ -111,7 +111,7 @@ def answer_query_with_context(
                 model="gpt-3.5-turbo",
                 temperature =  0.0,
                 messages=[
-                    {"role": "system", "content": f"Answer the question as truthfully as possible using the provided context, paraphrase the answer and if the answer is not contained within the text below, say I don't know.{contexts}"},
+                    {"role": "system", "content": f"Answer the question as truthfully as possible using your information and the context provided, paraphrase the answer and if the answer is not contained within the text below, say I don't know.{contexts}"},
                     {"role": "user", "content": query}
                 ]
                 # **COMPLETIONS_API_PARAMS
