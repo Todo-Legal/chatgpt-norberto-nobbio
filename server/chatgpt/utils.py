@@ -129,7 +129,7 @@ def answer_query_with_gpt(
                 model="gpt-3.5-turbo",
                 temperature =  0.0,
                 messages=[
-                    {"role": "system", "content": f"Answer the question as truthfully as possible using your information  and pdf's of this drive: https://drive.google.com/drive/folders/1a57LtGGr_ComDjAwYVef2IUOsFrQljub?usp=sharing, paraphrase the answer and if the answer is not contained within the text below, say I don't know."},
+                    {"role": "system", "content": f"Answer the question as truthfully as possible using your information and pdf's of this drive: https://drive.google.com/drive/folders/1a57LtGGr_ComDjAwYVef2IUOsFrQljub?usp=sharing, paraphrase the answer and limit your answers to questions of law only, say I don't know in other cases"},
                     {"role": "user", "content": query}
                 ]
                 # **COMPLETIONS_API_PARAMS
