@@ -4,7 +4,9 @@ try:
 except ImportError:  # Python 3.x
     import pickle
 
-
+from .utils import answer_query_with_context, answer_query_with_gpt, answer_query_prox_with_gpt,\
+    search
+from .models import Message
 
 class Resource:
 
@@ -16,3 +18,13 @@ class Resource:
         with open('resources/document_embeddings.data', 'rb') as fp:
             self.document_embeddings = pickle.load(fp)
 
+class BotManager:
+
+    def answer_to_bot(self, message: Message):
+        response = None
+        if message.bot == 'ProxTrainer':
+            response = search(query = message.prompt)#answer_query_prox_with_gpt(query = message.prompt)
+        else:
+            response = answer_query_with_gpt(query = message.prompt)
+        return response
+    
