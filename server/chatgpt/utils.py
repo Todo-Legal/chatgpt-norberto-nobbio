@@ -5,6 +5,9 @@ import tiktoken
 import pandas as pd
 import numpy as np
 from llama_index import GPTSimpleVectorIndex, SimpleDirectoryReader
+from sqlalchemy.orm import Session
+from ..database.database import SessionLocal
+from ..database import crud
 
 from .constants import Environment, PATH
 openai.api_key = Environment.OPENAI_API
@@ -124,20 +127,31 @@ def answer_query_with_context(
             )
     return response["choices"][0]["message"]["content"]
 
-
+def generate_message_structure(chats):
+    messages = [{"role": "system", "content": f"Answer the question as truthfully as possible using your information and pdf's of this drive: https://drive.google.com/drive/folders/1a57LtGGr_ComDjAwYVef2IUOsFrQljub?usp=sharing, paraphrase the answer and limit your answers to questions of law only, say I don't know in other cases"},]
+    for chat in chats:
+        messages.append({
+            "role": 'assistant' if chat.get('role', '') == 'bot' else 'user', 
+            "content": chat.get('message')
+        })
+    return messages
 def answer_query_with_gpt(
     ** kargs,
 ) -> str:
 
     query = kargs.get('query')
+    history = kargs.get('history')
+    messages = generate_message_structure(history)
     response = openai.ChatCompletion.create(
                 # prompt=prompt,
                 model="gpt-3.5-turbo",
                 temperature =  0.0,
-                messages=[
-                    {"role": "system", "content": f"Answer the question as truthfully as possible using your information and pdf's of this drive: https://drive.google.com/drive/folders/1a57LtGGr_ComDjAwYVef2IUOsFrQljub?usp=sharing, paraphrase the answer and limit your answers to questions of law only, say I don't know in other cases"},
-                    {"role": "user", "content": query}
-                ]
+                messages = messages
+                # messages=[
+                #     {"role": "system", "content": f"Answer the question as truthfully as possible using your information and pdf's of this drive: https://drive.google.com/drive/folders/1a57LtGGr_ComDjAwYVef2IUOsFrQljub?usp=sharing, paraphrase the answer and limit your answers to questions of law only, say I don't know in other cases"},
+                #     {"role": "user", "content": "My name is Moises"},
+                #     {"role": "user", "content": query}
+                # ]
                 # **COMPLETIONS_API_PARAMS
             )
     return response["choices"][0]["message"]["content"]
@@ -173,3 +187,10 @@ def search(query):
     
     return response.response
 
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
