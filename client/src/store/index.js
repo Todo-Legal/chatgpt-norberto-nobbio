@@ -100,12 +100,16 @@ const mutations = {
             const path = `http://127.0.0.1:5000/hello`
             axios.post(path, param)
                 .then((res) => {
-                    this.commit('SEND_MESSAGE', {
-                        content: res.data['answer'],
-                        sender: bot.name,
-                        receiver: 'user',
-                        time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
-                    })
+                    for(let chat in res.data['answer']){
+                        this.commit('SEND_MESSAGE', {
+                            content: res.data['answer'][chat]['message'],
+                            sender: res.data['answer'][chat]['role'] == 'bot' ? bot.name: 'user',
+                            receiver: res.data['answer'][chat]['role'] == 'bot'? 'user' : bot.name,
+                            time: util.formatDate.format(new Date(), 'yyyy-MM-dd hh:mm:ss')
+                        })
+
+                    }
+                    
                 })
                 .catch((error) => {
                     this.commit('SEND_MESSAGE', {
