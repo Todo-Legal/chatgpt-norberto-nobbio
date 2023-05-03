@@ -1,6 +1,12 @@
 from fastapi import FastAPI
-from chatgpt.router import router
+from .chatgpt.router import router
 from fastapi.middleware.cors import CORSMiddleware
+
+from .database import crud, models, schemas
+from .database.database import SessionLocal, engine
+
+models.Base.metadata.create_all(bind=engine)
+
 
 # origins = [
 #     "http://localhost",
