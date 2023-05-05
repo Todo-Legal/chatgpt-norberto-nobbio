@@ -97,7 +97,7 @@ const mutations = {
                 'bot': bot.name,
                 'prompt': bot.init_prompt,
             }
-            const path = `http://127.0.0.1:5000/hello`
+            const path = `http://18.221.190.221:5000/hello`
             axios.post(path, param)
                 .then((res) => {
                     for(let chat in res.data['answer']){

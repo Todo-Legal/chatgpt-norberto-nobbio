@@ -4,6 +4,6 @@ const {
 module.exports = defineConfig({
     transpileDependencies: true,
     devServer: {
-        proxy: 'http://127.0.0.1:5000',
+        proxy: 'http://18.221.190.221:5000',
         }
 })
